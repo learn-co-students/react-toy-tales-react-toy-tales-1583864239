@@ -11,7 +11,8 @@ import data from './data'
 class App extends React.Component{
 
   state = {
-    display: false
+    display: false,
+    toys: data
   }
 
   handleClick = () => {
@@ -21,20 +22,60 @@ class App extends React.Component{
     })
   }
 
+  handleForm = (toyObj) => {
+      let newObj = {
+        ...toyObj,
+        id: Math.floor(Math.random() * 1000 ),
+        likes: 0 
+      }
+
+      let newArray = [...data, newObj]
+
+      this.setState({
+        toys: newArray
+      })
+  }
+
+  deleteOneToy = (id) => {
+    let filteredArray = this.state.toys.filter( toyObj => {
+      return toyObj.id !== id
+    })
+    this.setState({
+      toys: filteredArray
+    })
+  }
+
+  addLike = (id, increment) => {
+    let updateArray = this.state.toys.map( toy => {
+      if ( toy.id === id){
+        return  {
+          ...toy,
+          likes: toy.likes + increment
+        }
+      } else {
+        return toy
+      }
+    })
+    this.setState({
+      toys: updateArray
+    })
+  }
+
   render(){
+    console.log(this.state.toys)
     return (
       <>
         <Header/>
         { this.state.display
             ?
-          <ToyForm/>
+          <ToyForm handleForm={this.handleForm} />
             :
           null
         }
         <div className="buttonContainer">
           <button onClick={this.handleClick}> Add a Toy </button>
         </div>
-        <ToyContainer/>
+        <ToyContainer toys={this.state.toys} deleteOneToy={this.deleteOneToy} addLike={this.addLike} />
       </>
     );
   }
