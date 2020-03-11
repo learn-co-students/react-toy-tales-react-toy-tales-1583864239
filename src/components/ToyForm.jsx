@@ -13,7 +13,7 @@ class ToyForm extends Component {
     e.preventDefault()
     console.log("click")
     this.props.handleForm(this.state)
-    
+       
   }
 
   handleAllChange = (e) => {
