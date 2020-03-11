@@ -6,16 +6,16 @@ class ToyCard extends Component {
   
   handleUpdate = (e) => {
     console.log("testing this like button click to increase value by 1.")
-    this.props.updateOneToy(this.props.toyObj.id, 1)
+    this.props.updateOneToy(this.props.toyObj.id, 1) // invoking function from grandparent to updateOneToy, taking in id, incrementing by 1.
   }
 
   handleDelete = (e) => {
     console.log("this is activated by clicking the delete button")
-    this.props.deleteOneToy(this.props.toyObj.id)
+    this.props.deleteOneToy(this.props.toyObj.id) // invoking function from grandparent to deleteOneToy based on Id.
   }
 
   render() {
-    let { name, image, likes } = this.props.toyObj
+    let { name, image, likes } = this.props.toyObj // pulling Attribute keys from Object to use as variables (super simplified)
     return (
       <div className="card">
         <h2>{ name }</h2>
