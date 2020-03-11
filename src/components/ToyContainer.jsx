@@ -1,12 +1,23 @@
 import React from 'react';
 import ToyCard from './ToyCard'
 
-const ToyContainer = () => {
+const ToyContainer = (props) => {
+
+  let toyComponentArray = props.toys.map(item => 
+      <ToyCard 
+        key={item.id} 
+        toyObject={item}
+        updateToy={props.updateToy}
+        deleteToy={props.deleteToy}
+      />
+  )
+
   return(
-    <div id="toy-collection">
-      {/* Render the collection of ToyCards */}
+    <div>
+      {toyComponentArray}
     </div>
-  );
+  )
+
 }
 
 export default ToyContainer;
