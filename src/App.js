@@ -4,20 +4,32 @@ import './App.css';
 import Header from './components/Header'
 import ToyForm from './components/ToyForm'
 import ToyContainer from './components/ToyContainer'
-
 import data from './data'
 
 
 class App extends React.Component{
 
   state = {
-    display: false
+    display: false,
+    toys: data
   }
 
   handleClick = () => {
     let newBoolean = !this.state.display
     this.setState({
       display: newBoolean
+    })
+  }
+
+  addToy = (toyObj) => {
+    let newToy = {
+      ...toyObj,
+      id: Math.floor(Math.random() * 100),
+      likes: 0
+    }
+    let newToyArray = [...this.state.toys, newToy]
+    this.setState({
+      toys: newToyArray
     })
   }
 
@@ -34,7 +46,9 @@ class App extends React.Component{
         <div className="buttonContainer">
           <button onClick={this.handleClick}> Add a Toy </button>
         </div>
-        <ToyContainer/>
+        <ToyContainer
+        toys = {this.state.toys}
+        />
       </>
     );
   }
