@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 
 class ToyForm extends Component {
 
+  state={
+    name: "Hi",
+    image: "https://cdn-ssl.s7.disneystore.com/is/image/DisneyShopping/1231047442892"
+  }
+
   render() {
     return (
       <div className="container">
