@@ -11,7 +11,23 @@ import data from './data'
 class App extends React.Component{
 
   state = {
-    display: false
+    display: false,
+    toys: data
+  }
+
+  addNewToy = (toyObj) => {
+    let newToy = {
+      ...toyObj,
+      id: Math.floor(Math.random() * 1000),
+      likes: 0
+    }
+
+    let newToyArray = [newToy, ...this.state.toys]
+
+    this.setState({
+      toys: newToyArray
+    })
+
   }
 
   handleClick = () => {
@@ -27,7 +43,7 @@ class App extends React.Component{
         <Header/>
         { this.state.display
             ?
-          <ToyForm/>
+          <ToyForm addNewToy={this.addNewToy}/>
             :
           null
         }
@@ -35,7 +51,7 @@ class App extends React.Component{
           <button onClick={this.handleClick}> Add a Toy </button>
         </div>
         <ToyContainer
-          toys={data}
+          toys={ this.state.toys }
         />
       </>
     );
