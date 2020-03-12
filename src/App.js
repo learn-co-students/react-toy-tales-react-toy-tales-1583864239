@@ -5,13 +5,14 @@ import Header from './components/Header'
 import ToyForm from './components/ToyForm'
 import ToyContainer from './components/ToyContainer'
 
-import data from './data'
+import toysData from './data'
 
 
 class App extends React.Component{
 
   state = {
-    display: false
+    display: false,
+    toys: toysData
   }
 
   handleClick = () => {
@@ -21,20 +22,52 @@ class App extends React.Component{
     })
   }
 
+  addNewToy = (toyObj) => {
+    let newToyObj = {
+    ...toyObj,
+    id: Math.floor(Math.random() * 10000),
+    likes: 0
+    }
+
+
+
+    let newToyArray = [newToyObj, ...this.state.toys]
+
+    this.setState({
+      toys: newToyArray
+    })
+
+  }
+
+  deleteToy = (id) => {
+
+    let filteredToyArray = this.state.toys.filter(toyObj => {
+        return toyObj.id !== id
+    })
+    
+
+    this.setState({
+      toys: filteredToyArray
+    })
+  }
+
+  
+
+
   render(){
     return (
       <>
         <Header/>
         { this.state.display
             ?
-          <ToyForm/>
+          <ToyForm addNewToy ={this.addNewToy} />
             :
           null
         }
         <div className="buttonContainer">
           <button onClick={this.handleClick}> Add a Toy </button>
         </div>
-        <ToyContainer/>
+        <ToyContainer toys={this.state.toys} deleteToy={this.deleteToy}/>
       </>
     );
   }
