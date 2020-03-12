@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class ToyForm extends Component {
+  handleSubmit = (e) => {
+    e.preventDefault()
+    
+  }
 
   render() {
     return (
