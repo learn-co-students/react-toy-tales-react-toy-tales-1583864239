@@ -5,13 +5,13 @@ import Header from './components/Header'
 import ToyForm from './components/ToyForm'
 import ToyContainer from './components/ToyContainer'
 
-import data from './data'
+import toyData from './data'
 
 
 class App extends React.Component{
 
   state = {
-    display: false
+    toy: toyData
   }
 
   handleClick = () => {
@@ -27,7 +27,7 @@ class App extends React.Component{
         <Header/>
         { this.state.display
             ?
-          <ToyForm/>
+          <ToyForm addOneToy= {this.addOneToy}/>
             :
           null
         }
