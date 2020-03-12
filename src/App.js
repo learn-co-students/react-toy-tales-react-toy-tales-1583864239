@@ -30,6 +30,31 @@ class App extends React.Component{
 
   }
 
+  deleteToy = (toyObj) => {
+    let filteredToyArray = this.state.toys.filter(toy => toy.id !== toyObj.id)
+
+    this.setState({
+      toys: filteredToyArray
+    })
+  }
+
+  likeToy = (id) => {
+    let updatedToys = this.state.toys.map((toy) => {
+      if (toy.id === id) {
+        return {
+          ...toy,
+          likes: toy.likes +  1
+        }
+      } else {
+        return toy
+      }
+    })
+
+    this.setState({
+      toys: updatedToys
+    })
+  }
+
   handleClick = () => {
     let newBoolean = !this.state.display
     this.setState({
@@ -43,7 +68,7 @@ class App extends React.Component{
         <Header/>
         { this.state.display
             ?
-          <ToyForm addNewToy={this.addNewToy}/>
+          <ToyForm addNewToy={this.addNewToy} />
             :
           null
         }
@@ -52,6 +77,8 @@ class App extends React.Component{
         </div>
         <ToyContainer
           toys={ this.state.toys }
+          deleteToy={this.deleteToy}
+          likeToy={this.likeToy}
         />
       </>
     );

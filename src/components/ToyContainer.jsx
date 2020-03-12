@@ -8,6 +8,8 @@ const ToyContainer = (props) => {
     return <ToyCard
       key={toy.id}
       toyObj={toy}
+      deleteToy={props.deleteToy}
+      likeToy={props.likeToy}
     />
   })
 
